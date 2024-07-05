@@ -8,7 +8,26 @@ For new features or suggestions, please provide feedback.
 
 Update:
 2024-0705：
-3d_meshtool
+
+ 3d_meshtool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     Array #Arrays can perform batch operations on certain properties, such as the of zero123, image batches, creating certain increments, etc.
         basics #Create an array
             array1 step #Generate an array with a starting value and step size.
@@ -40,7 +59,7 @@ Update:
         mesh_cleanup #Mesh cleanup, select cleaning up model debris.
         mesh_subdivide #Mesh subdivision, increases vertices without changing the shape.
     Show
-
+\n
 Roadmap:
 Basic Functions
 ✅ Array sequence (still needs optimization)
@@ -65,6 +84,7 @@ Model Editing
 other
 🟩 Display any data.
 
+
 简介：
 一个简单的comfyui内的3D模型处理工具
 
@@ -73,7 +93,15 @@ other
 
 更新：
 2024-0705：
+
+
+
+
 3d_meshtool
+
+
+
+
     array #数组可以批量操作某些属性，如zero123的视角，图像批次，制作某些增量等。
         basics #生成数组
             array1 step #起始值+步长生成数组
@@ -107,7 +135,6 @@ other
     show
 
 路线：
-
 基础功能
 ✅array序列(还需要优化)
 ✅转换数据(可能需要增加其它转换)
