@@ -61,8 +61,8 @@ class show_any:#未完成
         return {"ui": {"text": [text]}, "result": (text,)}
 
 NODE_CLASS_MAPPINGS = {
-    "show_any": show_any,
+    #"show_any": show_any,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "show_any": "Show Any",
+    #"show_any": "Show Any",
 }
