@@ -1,7 +1,13 @@
+"""
+@author: 807502278
+@title: 3D Mesh Tool
+@nickname: 3D Mesh Tool
+@description: A simple 3D model processing tool within ComfyUI
+"""
+
 import numpy as np
 
 CATEGORY_str1 = "3D_MeshTool/" 
-
 
 #---------------show class---------------
 CATEGORY_str2 = "show"
