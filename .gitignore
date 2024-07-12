@@ -4,3 +4,5 @@
 /other/
 /重置git本地缓存.bat
 /install.bat
+/__pycache__
+/nodes/__pycache__
