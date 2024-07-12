@@ -1,6 +1,5 @@
 import numpy as np
 import torch
-import xatlas
 from kiui.op import safe_normalize, dot
 from ..moduel.mesh_class import Mesh
 
@@ -18,6 +17,7 @@ class UnwrapUV_xatlas:
     RETURN_NAMES = ("mesh","vmapping")
     FUNCTION = "mesh_UV_xatlas"
     def mesh_UV_xatlas(self,mesh,UV_options=None):
+        import xatlas
         if UV_options is None:
             UV_options = xatlas.ChartOptions()
         v_np = mesh.v.detach().cpu().numpy()
@@ -70,16 +70,16 @@ class UV_options:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "fix_winding":("BOOLEAN",{"default":False}),
-                "max_boundary_length":("FLOAT",{"default":0.0,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),
-                "max_chart_area":("FLOAT",{"default":0.0,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),
-                "max_cost":("FLOAT",{"default":2.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),
-                "max_iterations":("INT",{"default":1,"min":1,"max":64,"step":1,"display": "slider"}),
-                "normal_deviation_weight":("FLOAT",{"default":2.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),
-                "normal_seam_weight":("FLOAT",{"default":4.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),
-                "roundness_weight":("FLOAT",{"default":0.01,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),
-                "straightness_weight":("FLOAT",{"default":6.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),
-                "texture_seam_weight":("FLOAT",{"default":0.5,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),
+                "fix_winding":("BOOLEAN",{"default":False}),#打包孤岛
+                "max_boundary_length":("FLOAT",{"default":0.0,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),#边界长度限制
+                "max_chart_area":("FLOAT",{"default":0.0,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),#最大面积限制
+                "max_cost":("FLOAT",{"default":2.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),#最大限制
+                "max_iterations":("INT",{"default":1,"min":1,"max":64,"step":1,"display": "slider"}),#最大迭代次数
+                "normal_deviation_weight":("FLOAT",{"default":2.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),#法线偏差权重
+                "normal_seam_weight":("FLOAT",{"default":4.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),#法线缝合权重
+                "roundness_weight":("FLOAT",{"default":0.01,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),#圆度权重
+                "straightness_weight":("FLOAT",{"default":6.0,"min":0.0,"max":10.0,"step":0.1,"display": "slider"}),#直线度权重
+                "texture_seam_weight":("FLOAT",{"default":0.5,"min":0.0,"max":1.0,"step":0.01,"display": "slider"}),#纹理缝合权重
                 },
             }
     CATEGORY = "3D_MeshTool/Edit"
@@ -96,6 +96,7 @@ class UV_options:
                         roundness_weight,
                         straightness_weight,
                         texture_seam_weight):
+        import xatlas
         chart_options = xatlas.ChartOptions()
         chart_options.fix_winding = fix_winding
         chart_options.max_boundary_length = max_boundary_length
