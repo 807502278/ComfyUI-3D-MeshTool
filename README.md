@@ -29,12 +29,14 @@ For new features or suggestions, please provide feedback.**
         - `mesh_data`  # Retrieve mesh data.
         - `mesh_data_statistics`  # Statistics of mesh data, other than vertices and faces, other data is used to determine if it is empty.
         - `mesh_clean_data`  # Clean mesh data, can customize the removal of invalid or mismatched data.
+        - `Ply_load`  #20240810 Load a PLY file.
     - `Camera`
         - `array1 to camposes`  # Convert an array to 3dpack camera poses (requires a 6xNx3 array, refer to 3dpack's campos standard).
     - `Edit`
         - `unwrapUV_xatlas`  # Latest (2023) UV unwrapping algorithm.
         - `UV_options`  # Settings for the unwrapUV_xatlas node, if not connected, default settings are used.
         - `Auto_Normal`  # Automatically calculate model normals.
+        - `Ply_normalize`  #20240810 Normalize the imported ply coordinates/colors, adjust the display size of individual points, and exchange color channels.
     - `Optimization`
         - `mesh_optimization`  # Mesh optimization, select optimization types and parameters.
         - `mesh_cleanup`  # Mesh cleanup, select cleaning up model debris.
@@ -46,6 +48,7 @@ For new features or suggestions, please provide feedback.**
     - ✅ `Array sequence` (still needs optimization)
     - ✅ `Data conversion` (may need to add other conversions)
     - ✅ `OBJ import` (used code from 3dpack, still need to add whether the model is normalized and its data output to retain the original size and position when processing models in batch)
+    - ✅ `PLY import` (The ply point cloud output from industrial software can be imported, and the author tested its feasibility using CloudCompare)
     - 🟩 `Simple direct preview window` (no need to save first) + preview window for world normals/depth/mask/specified view (can be used for compositing)
     - 🟩 `Save`, choose which data to save
 - `Model Optimization`
@@ -61,6 +64,7 @@ For new features or suggestions, please provide feedback.**
     - 🟩 `UV remap`
     - 🟩 `Restore normalized vertices to their original state`
     - 🟩 `High-poly to low-poly texture/bump baking, AO baking` (attempt to convert Blender's code to Comfyui)
+    - 🟩 `ply segmentation`
     - 🟩... (other edits)
 - `other`
     - 🟩 `Display any data.`
