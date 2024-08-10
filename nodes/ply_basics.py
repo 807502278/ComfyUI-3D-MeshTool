@@ -175,7 +175,7 @@ class ply_normalize:#快速测试,处理工业ply的'vertex'的坐标和颜色
                         "RGB_normalize":("BOOLEAN",{"default":True}),
                         "opacity_transfer":("BOOLEAN",{"default":False}),
                         "auto_PointSize":("BOOLEAN",{"default":False}),
-                        "PointSize_scale":("FLOAT",{"default":3.00,"min":0.00,"max":4.00,"step":0.10}),
+                        "PointSize_scale":("FLOAT",{"default":3.00,"min":0.00,"max":4.00,"step":0.10,"display": "slider"}),
                         "R": (RGB,{"default":"f_dc_0"}),
                         "G": (RGB,{"default":"f_dc_1"}),
                         "B": (RGB,{"default":"f_dc_2"}),
