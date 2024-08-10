@@ -1,3 +1,9 @@
+import numpy as np
+import ast
+import re
+
+from ..moduel.str_edit import strtolist
+
 CATEGORY_str1 = "3D_MeshTool/Array/"#
 
 #---------------Basics class---------------
@@ -33,9 +39,9 @@ class array_end_increment:#输入初始值、终值、增量生成等差数列
         return {
                 "required":
                     {
-                    "start": ("FLOAT", {"default": 0.0,"min": -99999.0,"max": 99999.0,"step": 0.5}),
+                    "start": ("FLOAT", {"default": 0.0,"step": 0.5}),
                     "end": ("FLOAT", {"default": 3.0,"min": 1.0,"max": 99999.0,"step": 0.5}),
-                    "increment": ("FLOAT", {"default":0.5,"min": -99999.0,"max": 99999.0,"step": 0.5}),
+                    "increment": ("FLOAT", {"default":0.5,"step": 0.5}),
                     }
                 }    
     CATEGORY = CATEGORY_str1+CATEGORY_str2
