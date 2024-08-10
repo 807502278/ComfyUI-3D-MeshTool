@@ -1,0 +1,516 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 7,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "ply_normalize",
+      "pos": [
+        1730.437695003965,
+        450
+      ],
+      "size": {
+        "0": 210,
+        "1": 226
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "gs_ply",
+          "type": "GS_PLY",
+          "link": 2,
+          "label": "gs_ply"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "gs_ply",
+          "type": "GS_PLY",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "gs_ply",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ply_normalize"
+      },
+      "widgets_values": [
+        true,
+        true,
+        false,
+        false,
+        1.9000000000000001,
+        "f_dc_0",
+        "f_dc_1",
+        "f_dc_2"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "[Comfy3D] Preview 3DGS",
+      "pos": [
+        2278,
+        453
+      ],
+      "size": [
+        600,
+        500
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "gs_file_path",
+          "type": "STRING",
+          "link": 7,
+          "widget": {
+            "name": "gs_file_path"
+          },
+          "label": "gs文件路径"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "[Comfy3D] Preview 3DGS"
+      },
+      "widgets_values": [
+        "",
+        null
+      ]
+    },
+    {
+      "id": 5,
+      "type": "SomethingToString",
+      "pos": [
+        1734,
+        737
+      ],
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input",
+          "type": "*",
+          "link": 5,
+          "label": "输入"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SomethingToString"
+      },
+      "widgets_values": [
+        "3DGS_",
+        ".ply"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "Text Multiline",
+      "pos": [
+        1374,
+        588
+      ],
+      "size": [
+        283.5,
+        75.99997901916504
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "D:\\AI\\ComfyUI-3D\\ComfyUI\\input\\output_20240809E.ply"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 4,
+      "type": "Seed_",
+      "pos": [
+        1443,
+        737
+      ],
+      "size": {
+        "0": 217.7421875,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "随机种",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Seed_"
+      },
+      "widgets_values": [
+        1000,
+        "increment"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "[Comfy3D] Save 3DGS",
+      "pos": [
+        2000,
+        679
+      ],
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "gs_ply",
+          "type": "GS_PLY",
+          "link": 3,
+          "label": "gs_ply"
+        },
+        {
+          "name": "save_path",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "save_path"
+          },
+          "label": "保存路径"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "save_path",
+          "type": "STRING",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "保存路径",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "[Comfy3D] Save 3DGS"
+      },
+      "widgets_values": [
+        "3DGS_%Y-%m-%d-%M-%S-%f.ply"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "[Comfy3D] Switch 3DGS Axis",
+      "pos": [
+        1995,
+        473
+      ],
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "gs_ply",
+          "type": "GS_PLY",
+          "link": 6,
+          "label": "gs_ply"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "switched_gs_ply",
+          "type": "GS_PLY",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "[Comfy3D] Switch 3DGS Axis"
+      },
+      "widgets_values": [
+        "+x",
+        "-z",
+        "-y"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "[Comfy3D] Load 3DGS",
+      "pos": [
+        1461,
+        451
+      ],
+      "size": {
+        "0": 210,
+        "1": 34
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "gs_file_path",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "gs_file_path"
+          },
+          "label": "gs文件路径"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "gs_ply",
+          "type": "GS_PLY",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "label": "gs_ply",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "[Comfy3D] Load 3DGS"
+      },
+      "widgets_values": [
+        "D:\\AI\\ComfyUI-3D\\ComfyUI\\input\\output_20240801B.ply"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      7,
+      0,
+      1,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      1,
+      0,
+      2,
+      0,
+      "GS_PLY"
+    ],
+    [
+      3,
+      6,
+      0,
+      3,
+      0,
+      "GS_PLY"
+    ],
+    [
+      4,
+      5,
+      0,
+      3,
+      1,
+      "STRING"
+    ],
+    [
+      5,
+      4,
+      0,
+      5,
+      0,
+      "*"
+    ],
+    [
+      6,
+      2,
+      0,
+      6,
+      0,
+      "GS_PLY"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        -578.8540382545419,
+        52.102082049388905
+      ]
+    }
+  },
+  "version": 0.4,
+  "api_prompt": {
+    "1": {
+      "inputs": {
+        "gs_file_path": [
+          "7",
+          0
+        ]
+      },
+      "class_type": "[Comfy3D] Load 3DGS",
+      "_meta": {
+        "title": "加载3DGS"
+      }
+    },
+    "2": {
+      "inputs": {
+        "xyz_normalize": true,
+        "RGB_normalize": true,
+        "opacity_transfer": false,
+        "auto_PointSize": false,
+        "PointSize_scale": 1.9000000000000001,
+        "R": "f_dc_0",
+        "G": "f_dc_1",
+        "B": "f_dc_2",
+        "gs_ply": [
+          "1",
+          0
+        ]
+      },
+      "class_type": "ply_normalize",
+      "_meta": {
+        "title": "ply_normalize"
+      }
+    },
+    "3": {
+      "inputs": {
+        "save_path": [
+          "5",
+          0
+        ],
+        "gs_ply": [
+          "6",
+          0
+        ]
+      },
+      "class_type": "[Comfy3D] Save 3DGS",
+      "_meta": {
+        "title": "保存3DGS"
+      }
+    },
+    "4": {
+      "inputs": {
+        "seed": 1000
+      },
+      "class_type": "Seed_",
+      "_meta": {
+        "title": "随机种"
+      }
+    },
+    "5": {
+      "inputs": {
+        "prefix": "3DGS_",
+        "suffix": ".ply",
+        "input": [
+          "4",
+          0
+        ]
+      },
+      "class_type": "SomethingToString",
+      "_meta": {
+        "title": "任意到字符串"
+      }
+    },
+    "6": {
+      "inputs": {
+        "axis_x_to": "+x",
+        "axis_y_to": "-z",
+        "axis_z_to": "-y",
+        "gs_ply": [
+          "2",
+          0
+        ]
+      },
+      "class_type": "[Comfy3D] Switch 3DGS Axis",
+      "_meta": {
+        "title": "切换3DGS轴向"
+      }
+    },
+    "7": {
+      "inputs": {
+        "text": "D:\\AI\\ComfyUI-3D\\ComfyUI\\input\\output_20240809E.ply"
+      },
+      "class_type": "Text Multiline",
+      "_meta": {
+        "title": "多行文本"
+      }
+    },
+    "8": {
+      "inputs": {
+        "gs_file_path": [
+          "3",
+          0
+        ],
+        "preview3d": null
+      },
+      "class_type": "[Comfy3D] Preview 3DGS",
+      "_meta": {
+        "title": "预览3DGS"
+      }
+    }
+  }
+}
