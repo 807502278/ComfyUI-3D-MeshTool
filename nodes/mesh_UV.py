@@ -1,6 +1,5 @@
 import numpy as np
 import torch
-import xatlas
 from kiui.op import safe_normalize, dot
 from ..moduel.mesh_class import Mesh
 
@@ -18,6 +17,7 @@ class UnwrapUV_xatlas:
     RETURN_NAMES = ("mesh","vmapping")
     FUNCTION = "mesh_UV_xatlas"
     def mesh_UV_xatlas(self,mesh,UV_options=None):
+        import xatlas
         if UV_options is None:
             UV_options = xatlas.ChartOptions()
         v_np = mesh.v.detach().cpu().numpy()
@@ -96,6 +96,7 @@ class UV_options:
                         roundness_weight,
                         straightness_weight,
                         texture_seam_weight):
+        import xatlas
         chart_options = xatlas.ChartOptions()
         chart_options.fix_winding = fix_winding
         chart_options.max_boundary_length = max_boundary_length
