@@ -46,6 +46,34 @@ class ply_load:
             print("Loading PLY file: ",path)
             return (PlyData.read(path),)
 
+class ply_save:
+    """
+    说明:
+    1 若不输入路径则保存在插件缓存文件夹内
+    2 缓存文件夹内仅保留一个ply文件,若存在则覆盖
+    explain:
+    1 Description: If no path is entered, it will be saved in the plugin cache folder.
+    2 Only one ply file is retained in the cache folder. If it exists, it will be overwritten.
+    """
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required":
+                    {
+                        "gs_ply":("GS_PLY",),
+                        "save_path":("STRING",{"default":""}),
+                    }
+                }
+    CATEGORY = CATEGORY_str1+CATEGORY_str2
+    RETURN_TYPES = ("GS_PLY","STRING",)
+    RETURN_NAMES = ("gs_ply","save_path",)
+    FUNCTION = "save"
+    def save(self,gs_ply,save_path):
+        if save_path == "" : save_path=None
+        a=ply1()
+        a.plydata=gs_ply
+        a.save(gs_ply,save_path)
+        return (gs_ply,save_path,)
+
 #---------------Edit---------------
 CATEGORY_str2 = "Edit"
 
@@ -244,9 +272,11 @@ class ply_normalize:#快速测试,处理工业ply的'vertex'的坐标和颜色
 NODE_CLASS_MAPPINGS={
     "ply_load":ply_load,
     "ply_normalize":ply_normalize,
+    "ply_save":ply_save,
     }
 
 NODE_DISPLAY_NAMES_MAPPINGS={
     "ply_load":"ply load",
     "ply_normalize":"ply normalize",
+    "ply_save":"ply save",
 }

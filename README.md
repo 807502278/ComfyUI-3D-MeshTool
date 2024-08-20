@@ -7,8 +7,7 @@ A simple 3D model processing tool within ComfyUI
 For new features or suggestions, please provide feedback.**
 
 **Update**:
-2024-0705：
-- `3d_meshtool`
+- `3d_meshtool` #2024-0705
     - `Array`  # Arrays can perform batch operations on certain properties, such as the of zero123, image batches, creating certain increments, etc.
         - `basics`  # Create an array
             - `array1 step`  # Generate an array with a starting value and step size.
@@ -16,7 +15,7 @@ For new features or suggestions, please provide feedback.**
             - `array1 end step`  # Generate an array with a starting value, end value, and step size.
             - `array1 step increment`  # Generate an array with a starting value, step size, and increment.
             - `string to array`  # Convert a string to an array, including standardized brackets/removing non-numeric functions.
-        - `calculation`
+        - `calculation` #2024-0705
             - `array1 T`  # Transpose the array
             - `array1 number to angle`  # Convert array numbers to angles, including semi-angles.
             - `array1 append`  # Concatenate arrays, automatically determining 1D and 2D addition.
@@ -24,20 +23,21 @@ For new features or suggestions, please provide feedback.**
             - `array1 attribute`  # Retrieve array attributes.
             - `array1 convert`  # Convert data types within the array.
             - `array1 select element`  # Select array elements, including standardized brackets/removing non-numeric functions.
-    - `Basics`
+    - `Basics` #2024-0705
         - `load_obj`  # Load an OBJ file.
         - `mesh_data`  # Retrieve mesh data.
         - `mesh_data_statistics`  # Statistics of mesh data, other than vertices and faces, other data is used to determine if it is empty.
         - `mesh_clean_data`  # Clean mesh data, can customize the removal of invalid or mismatched data.
         - `Ply_load`  #20240810 Load a PLY file.
-    - `Camera`
+        - `Ply_save`  #20240820 save a PLY file.
+    - `Camera` #2024-0705
         - `array1 to camposes`  # Convert an array to 3dpack camera poses (requires a 6xNx3 array, refer to 3dpack's campos standard).
-    - `Edit`
+    - `Edit` #2024-0705
         - `unwrapUV_xatlas`  # Latest (2023) UV unwrapping algorithm.
         - `UV_options`  # Settings for the unwrapUV_xatlas node, if not connected, default settings are used.
         - `Auto_Normal`  # Automatically calculate model normals.
         - `Ply_normalize`  #20240810 Normalize the imported ply coordinates/colors, adjust the display size of individual points, and exchange color channels.
-    - `Optimization`
+    - `Optimization` #2024-0705
         - `mesh_optimization`  # Mesh optimization, select optimization types and parameters.
         - `mesh_cleanup`  # Mesh cleanup, select cleaning up model debris.
         - `mesh_subdivide`  # Mesh subdivision, increases vertices without changing the shape.
@@ -61,6 +61,8 @@ For new features or suggestions, please provide feedback.**
 - `Model Editing`
     - ✅ `UV decomposition (xatlas)`
     - ✅ `Automatic vertex normals`
+    - 🟩 `Support for the UV channel of obj`
+    - 🟩 `Group support for ply`
     - 🟩 `UV remap`
     - 🟩 `Restore normalized vertices to their original state`
     - 🟩 `High-poly to low-poly texture/bump baking, AO baking` (attempt to convert Blender's code to Comfyui)
