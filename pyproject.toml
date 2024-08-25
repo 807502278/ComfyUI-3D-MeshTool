@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-3d-meshtool"
+description = "A simple 3D model processing tool within ComfyUI."
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["kiui", "xatlas", "pyfqmr #https://github.com/sp4cerat/Fast-Quadric-Mesh-Simplification", "#Don't install it for now, it may be needed in the future", "#PIL", "#meshlib #mesh edit", "#eigency", "#cmeel-eigen", "#numpy", "#torch"]
+
+[project.urls]
+Repository = "https://github.com/807502278/ComfyUI-3D-MeshTool"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-3D-MeshTool"
+Icon = ""
