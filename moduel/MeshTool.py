@@ -1,33 +1,5 @@
 import torch
 
-class getmeshdata:#待开发
-    def __init__(self):
-        pass
-    @classmethod
-    def get_f(cls, mesh1):
-        return mesh1.f.detach().cpu().numpy()
-    @classmethod
-    def get_vn(cls, mesh1):
-        return mesh1.vn.detach().cpu().numpy()
-    @classmethod
-    def get_fn(cls, mesh1):
-        return mesh1.fn.detach().cpu().numpy()
-    @classmethod
-    def get_vt(cls, mesh1):
-        return mesh1.vt.detach().cpu().numpy()
-    @classmethod
-    def get_ft(cls, mesh1):
-        return mesh1.ft.detach().cpu().numpy()
-    @classmethod
-    def get_albedo(cls, mesh1):
-        return mesh1.albedo.detach().cpu().numpy()
-    @classmethod
-    def get_vc(cls, mesh1):
-        return mesh1.vc.detach().cpu().numpy()
-    @classmethod
-    def get_metallicRoughness(cls, mesh1):
-        return mesh1.metallicRoughness.detach().cpu().numpy()
-
 class setmeshdata:#待开发
     def __init__(self):
         pass
