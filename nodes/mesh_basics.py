@@ -13,6 +13,11 @@ SUPPORTED_3D_EXTENSIONS = (
 )
 CATEGORY_str1 = "3D_MeshTool/" 
 
+devices_3dtool = ["Default","cpu"]
+if torch.cuda.is_available():
+    for i in range(torch.cuda.device_count()):
+        devices_3dtool.append(f"cuda:{i}")
+
 #---------------Basics class---------------
 CATEGORY_str2 = "Basics"
 
@@ -48,23 +53,78 @@ class load_mesh:
             print(f"[{self.__class__.__name__}] File {mesh_file_path} does not exist").error.print()
         return (mesh, )
     
-class mesh_data:
+class mesh_data_get:
     @classmethod
     def INPUT_TYPES(s):
         return {"required":{"mesh":("MESH",),},}
     CATEGORY = CATEGORY_str1+CATEGORY_str2
-    RETURN_TYPES = ("LIST","LIST","LIST","LIST","IMAGE","IMAGE","STRING")
-    RETURN_NAMES = ("vertex+face","Normal(vn+fn)","UVs(vt+ft)","vertex_color[N3]","Texture_Diffuse","Texture_reflection","mesh_device")
+    RETURN_TYPES = ("MESH", "LIST", "LIST", "LIST", "LIST", "LIST", "IMAGE", "IMAGE")
+    RETURN_NAMES = ("mesh","vertex","face","Normal_vnfn","UVs_vtft","vertex_color","Texture_Diffuse","Texture_reflection")
     FUNCTION = "mesh_data"
     def mesh_data(self,mesh):
-        vertex_face=[mesh.v,mesh.f]
+        vertex=mesh.v
+        face=mesh.f
         Normal = [mesh.vn,mesh.fn]
         UVs=[mesh.vt,mesh.ft]
         vertex_color=mesh.vc
         Texture_Diffuse=mesh.albedo
         Texture_reflection=mesh.metallicRoughness
-        mesh_device=mesh.device
-        return (vertex_face,Normal,UVs,vertex_color,Texture_Diffuse,Texture_reflection,mesh_device)
+        return (mesh,vertex,face,Normal,UVs,vertex_color,Texture_Diffuse,Texture_reflection)
+
+class mesh_data_set:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required":{
+                    "device":(devices_3dtool,),
+                    },
+                "optional":{
+                    "mesh":("MESH",),
+                    "vertex":("LIST",),
+                    "face":("LIST",),
+                    "Normal_vnfn":("LIST",),
+                    "UVs_vtft":("LIST",),
+                    "vertex_color":("LIST",),
+                    "Texture_Diffuse":("IMAGE",),
+                    "Texture_reflection":("IMAGE",),
+                    }
+                }
+    CATEGORY = CATEGORY_str1+CATEGORY_str2
+    RETURN_TYPES = ("MESH",)
+    RETURN_NAMES = ("mesh",)
+    FUNCTION = "mesh_data_set1"
+    def mesh_data_set1(self,
+                       mesh = None,
+                       vertex = None,
+                       face = None,
+                       Normal_vnfn = None,
+                       UVs_vtft = None,
+                       vertex_color = None,
+                       Texture_Diffuse = None,
+                       Texture_reflection = None,
+                       device="Default"):
+        if mesh is None:
+            mesh = Mesh()
+        if device=="Default":
+            device = mesh.device
+        else:
+            device = torch.device(device)
+        if vertex is not None:
+            mesh.v=torch.tensor(vertex, dtype=torch.float32, device=device)
+        if face != None:
+            mesh.f=torch.tensor(face, dtype=torch.int64, device=device)
+        if Normal_vnfn != None:
+            mesh.vn=torch.tensor(Normal_vnfn[0], dtype=torch.float32, device=device)
+            mesh.fn=torch.tensor(Normal_vnfn[1], dtype=torch.int64, device=device)
+        if UVs_vtft != None:
+            mesh.vt=torch.tensor(UVs_vtft[0], dtype=torch.float32, device=device)
+            mesh.ft=torch.tensor(UVs_vtft[1], dtype=torch.int64, device=device)
+        if vertex_color != None:
+            mesh.vc=torch.tensor(vertex_color, dtype=torch.float32, device=device)
+        if Texture_Diffuse != None:
+            mesh.albedo=Texture_Diffuse
+        if Texture_reflection != None:
+            mesh.metallicRoughness=Texture_reflection
+        return (mesh,)
 
 class mesh_data_Statistics:
     @classmethod
@@ -151,14 +211,16 @@ class mesh_clean_data:
 
 NODE_CLASS_MAPPINGS={
     "Load_OBJ":load_mesh,
-    "Mesh_Data":mesh_data,
+    "Mesh_Data_Get":mesh_data_get,
+    "Mesh_Data_Set":mesh_data_set,
     "Mesh_Data_Statistics":mesh_data_Statistics,
     #"mesh_data_bus":mesh_data_bus,
     "Mesh_Clean_Data":mesh_clean_data,
     }
 NODE_DISPLAY_NAMES_MAPPINGS={
     "Load_OBJ":"Load OBJ",
-    "Mesh_Data":"Mesh Data",
+    "Mesh_Data_Get":"Mesh Data Get",
+    "Mesh_Data_Set":"Mesh Data Set",
     "Mesh_Data_Statistics":"Mesh Data Statistics",
     #"mesh_data_bus":"mesh data bus",
     "Mesh_Clean_Data":"Mesh Clean Data",
