@@ -35,7 +35,7 @@ class Mesh:
         albedo: Optional[Tensor] = None,
         metallicRoughness: Optional[Tensor] = None,
         device: Optional[torch.device] = None,
-    ):
+        ):
         """Init a mesh directly using all attributes.
         Args:
             name = name :str.  Saving files and generating 3D scenes will require
