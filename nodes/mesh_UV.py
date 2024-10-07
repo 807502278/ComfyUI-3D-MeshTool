@@ -32,39 +32,6 @@ class UnwrapUV_xatlas:
         mesh.ft = ft
         return (mesh,vmapping)
 
-class UnwrapUV_Auto_xatlas:#已弃用
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {"mesh":("MESH",),
-                },
-            }
-    CATEGORY = "3D_MeshTool/Edit"
-    RETURN_TYPES = ("MESH","LIST")
-    RETURN_NAMES = ("mesh","vmapping")
-    FUNCTION = "auto_uv"
-    def auto_uv(self, mesh):
-        """auto calculate the uv coordinates.
-        Args:
-            cache_path (str, optional): path to save/load the uv cache as a npz file, this can avoid calculating uv every time when loading the same mesh, which is time-consuming. Defaults to None.
-            vmap (bool, optional): remap vertices based on uv coordinates, so each v correspond to a unique vt (necessary for formats like gltf). 
-                Usually this will duplicate the vertices on the edge of uv atlas. Defaults to True.
-        """
-        v_np = mesh.v.detach().cpu().numpy()
-        f_np = mesh.f.detach().int().cpu().numpy()
-        atlas = xatlas.Atlas()
-        atlas.add_mesh(v_np, f_np)
-        chart_options = xatlas.ChartOptions()
-        # chart_options.max_iterations = 4
-        atlas.generate(chart_options=chart_options)
-        vmapping, ft_np, vt_np = atlas[0]  # [N], [M, 3], [N, 2]
-        # save to cache
-        vt = torch.from_numpy(vt_np.astype(np.float32)).to(mesh.device)
-        ft = torch.from_numpy(ft_np.astype(np.int32)).to(mesh.device)
-        mesh.vt = vt
-        mesh.ft = ft
-        return (mesh,vmapping,)
-
 class UV_options:
     @classmethod
     def INPUT_TYPES(s):
