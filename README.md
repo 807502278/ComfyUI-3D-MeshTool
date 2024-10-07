@@ -6,6 +6,8 @@ A simple 3D model processing tool within ComfyUI
 **Partially referenced from everyone's plugins, if there is any inconvenience, please leave a message, and I will promptly remove the corresponding code.
 For new features or suggestions, please provide feedback.**
 
+Note: If the node name has been changed (after update), if there is this old node in the workflow, it will turn red. A new one needs to be created and connected again.
+
 **Update**:
 - `3d_meshtool` #2024-0705
     - `Array`  # Arrays can perform batch operations on certain properties, such as the of zero123, image batches, creating certain increments, etc.
@@ -25,7 +27,8 @@ For new features or suggestions, please provide feedback.**
             - `array1 select element`  # Select array elements, including standardized brackets/removing non-numeric functions.
     - `Basics` #2024-0705
         - `load_obj`  # Load an OBJ file.
-        - `mesh_data`  # Retrieve mesh data.
+        - `mesh_data_get`  # Retrieve mesh data.20241007 rename
+        - `mesh_data_set`  #20241007 Set mesh data.
         - `mesh_data_statistics`  # Statistics of mesh data, other than vertices and faces, other data is used to determine if it is empty.
         - `mesh_clean_data`  # Clean mesh data, can customize the removal of invalid or mismatched data.
         - `Ply_load`  #20240810 Load a PLY file.
@@ -61,7 +64,6 @@ For new features or suggestions, please provide feedback.**
 - `Model Editing`
     - ✅ `UV decomposition (xatlas)`
     - ✅ `Automatic vertex normals`
-    - 🟩 `Support for the UV channel of obj`
     - 🟩 `Group support for ply`
     - 🟩 `UV remap`
     - 🟩 `Restore normalized vertices to their original state`
