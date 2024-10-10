@@ -13,7 +13,6 @@ CATEGORY_str1 = "3D_MeshTool/"
 CATEGORY_str2 = "show"
 
 class AnyType(str):
-  """A special class that is always equal in not equal comparisons. Credit to pythongosssss"""
   def __ne__(self, __value: object) -> bool:
     return False
 any = AnyType("*")
@@ -24,12 +23,9 @@ class show_any:#未完成
     @classmethod
     def INPUT_TYPES(s):
         return {"required":{
-                    "Any":(any,{}),
+                    "Any":(any,),
                     "format":("BOOLEAN",{"default":True}),
                     },
-                "optional": {
-                    "Any": (any,),
-                    }
                }
     CATEGORY = CATEGORY_str1+CATEGORY_str2
     INPUT_IS_LIST = True
