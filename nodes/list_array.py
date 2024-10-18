@@ -463,7 +463,7 @@ class tensor_to_img:  # 张量转为图片
                 mask = torch.ones(shape, dtype=torch.float32)
                 mask = mask.squeeze(-1)
             elif tensor.shape[n-1] == 4:
-                mask = tensor[:, 3:]
+                mask = tensor[..., 3]
             else:
                 print(f"Error:(tensor_to_img 2-2)Image tensors require 3 or 4 channels, while the input is {tensor.shape[n-1]} channels")
         else:
