@@ -1,11 +1,12 @@
 import os
 import json
+from tqdm import tqdm
+from loguru import logger
+
 import numpy as np
 import torch
 import torchvision.transforms.functional
-from PIL import Image
-from collections import deque
-from loguru import logger
+
 from ..moduel.getdata import load_image_to_tensor
 from ..moduel.file import split_path
 
@@ -55,7 +56,7 @@ class RT_to_camposes:
                 "translation": ("Tensor",),
             },
             "optional": {
-                "orbit_radius": ("LIST")
+                "orbit_radius": ("Tensor",)
             }
         }
     CATEGORY = CATEGORY_str1
@@ -79,7 +80,7 @@ class RT_to_camposes:
 
         rotation[:, 2] = rotation[:, 1]
         rotation[:, 1] = rotation[:, 0]
-        rotation[:, 0] = orbit_radius[0, :]
+        rotation[:, 0] = orbit_radius[:, 0]
 
         cam_poses = np.hstack((rotation, translation))
         return (cam_poses.tolist(),)
@@ -200,9 +201,6 @@ class json_to_campos:
         image_bath = load_image_to_tensor(filelist)
         if to_angle:
             rotation = rotation * 57.29577951308232
-        print(f"debug---------translation {translation.shape}")
-        print(f"debug---------rotation {rotation.shape}")
-        print(f"debug---------coordinates {coordinates.shape}")
         return (rotation, translation, coordinates, image_bath)
 
     def read_camdata(self, dir, inspect_file=True):
@@ -223,6 +221,7 @@ class json_to_campos:
         dir_img, *p = split_path(dir)
 
         # Extract 4 pieces of data 提取4条数据
+        print("Extracting data from JSON file")
         for i in range(n):
             translation = torch.cat((translation, torch.tensor(
                 c[i]["properties"]['translation']).unsqueeze(0)), 0)
@@ -245,6 +244,7 @@ class json_to_campos:
                 print("Error-json_to_campos: No image file was found in the JSON data. ")
             else:
                 del_list = []
+                print("Check if the image file exists")
                 for i in range(len(filelist)):
                     if not os.path.isfile(filelist[i]):
                         del_list = del_list.append(i)
@@ -297,13 +297,13 @@ class img_bath_rotationZ:
                 rotation_z = rotation[:, 2:]
             n = len(rotation_z)
             if n == bath:
-                for i in range(bath):
+                print(f"rotate image batch: ")
+                for i in tqdm(range(bath)):
                     ro = float(rotation_z[i])
                     Tensor = image_bath[i].permute(2, 0, 1)
                     Tensor = torchvision.transforms.functional.rotate(
                         Tensor, ro, fill=0.5)
                     image_bath[i] = Tensor.permute(1, 2, 0)
-                    print(f"The first {i} rotate {ro} degrees")
             else:
                 print(
                     "Error-json_to_campos: The amount of JSON data is not equal to the batch of images")

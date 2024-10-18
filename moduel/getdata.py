@@ -5,6 +5,7 @@ import numpy as np
 import torch
 from PIL import Image
 from typing import Union
+from tqdm import tqdm
 
 """
 Load files and read data through keys or items...
@@ -73,15 +74,17 @@ def load_image_to_tensor(image_path: Union[str, list, np.ndarray]):
         image_path = np.array(image_path)
     if type(image_path) == np.ndarray:
         images = []
-        for path in image_path:
+        print("Loading images bath:")
+        for i in tqdm(range(np.size(image_path))):
+            path=image_path[i]
             if isinstance(path, str) and os.path.isfile(path):
                 image = Image.open(path)
                 img_np = np.array(image).transpose(*order)
                 images.append(torch.from_numpy(img_np).float() / 255.0)
-            elif isinstance(path, np.ndarray):
-                for i in range(len(path)):
-                    if isinstance(path[i], str) and os.path.isfile(path[i]):
-                        image = Image.open(path[i])
+            elif isinstance(path, np.ndarray): #如果是二维
+                for j in range(len(path)):
+                    if isinstance(path[j], str) and os.path.isfile(path[j]):
+                        image = Image.open(path[j])
                         img_np = np.array(image).transpose(*order)
                         images.append(torch.from_numpy(img_np).float() / 255.0)
         if images:
